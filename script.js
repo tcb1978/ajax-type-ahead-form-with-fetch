@@ -11,5 +11,22 @@ function findMatches(wordToMatch, cities) {
         //find out if the city or state matches what was searched
         const regex = new RegExp(wordToMatch, 'gi');
         return place.city.match(regex) || place.state.match(regex);
-    })
+    });
 }
+
+function displayMatches() {
+    const matchArray = findMatches(this.value, cities);
+    const html = matchArray.map(place => {
+        return `
+            <li><span></span>${place.city}, ${place.state}</span></li>
+            <li><span></span>${place.population}</span></li>
+            `
+    }).join();
+    suggestions.innerHTML = html
+}
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);
