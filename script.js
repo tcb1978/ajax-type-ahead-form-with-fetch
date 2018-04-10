@@ -19,9 +19,12 @@ function displayMatches() {
     const html = matchArray.map(place => {
         const regex = new RegExp(this.value, 'gi');
         const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`)
+        const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`)
+        const population = place.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         return `
-            <li><span></span>${cityName}, ${place.state}</span>
-                <span></span>${place.population}</span>
+            <li>
+                <span>${cityName}, ${place.state}</span>
+                <span>${population}</span>
             </li>
             `
     }).join('');
